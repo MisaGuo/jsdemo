@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>捡金币</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <style>
+        #map{ margin: 0 auto; width: 500px; height: 500px; border-left: 1px solid #ccc; border-top: 1px solid #ccc; }
+        #map div{ width: 9px; height: 9px; float: left; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc;}
+    </style>
+</head>
+<body onload="initMap();">
+<div id="map">
+
+</div>
+
+<script type="text/javascript">
+    var blocks = [];
+    // 初始化地图
+    function initMap(){
+        var map = document.getElementById("map");
+        // 创建文档碎片（临时盒子）
+        var temp = document.createDocumentFragment();
+        for(var k = 0; k < 50; k++){
+            blocks[k] = [];
+            for(var i = 0; i < 50; i++) {
+                // 创建地图格子
+                var block = document.createElement('div');
+                temp.appendChild(block);
+                blocks[k][i] = {
+                    dom: block,
+                    x: i,
+                    y: k
+                };
+            }
+        }
+        map.appendChild(temp);
+        // 地图生成完成，调用dropItems函数
+        setInterval(dropItems, 500);
+    }
+
+    // 掉落物体
+    function dropItems(){
+        var item = {};
+        // 生成掉落物体的X坐标
+        item.x = parseInt(Math.random(1) * 50) + 1;
+        item.y = 0;
+        // 判断生成的是金币还是炸弹, 0.4自己随意设置
+        if (Math.random(1) > 0.3) {
+            // 金币
+            item.type = 1;
+        } else {
+            // 炸弹
+            item.type = 0;
+        }
+        return drawItem(item);
+    }
+
+    // 在地图上画出item
+    function drawItem(item){
+        // 首先重置原来的金币方块
+        if (!!item.dom) {
+            item.dom.style.backgroundColor = 'white';
+        }
+        // blocks[0]
+        item.dom = blocks[item.y][item.x].dom;
+        if (item.type == 1) {
+            // 金币
+            item.dom.style.backgroundColor = 'yellow';
+        } else {
+            // 炸弹
+            item.dom.style.backgroundColor = 'black';
+        }
+        dropDown(item);
+    }
+
+    // 控制金币或者炸弹下落
+    function dropDown(item){
+        // 判断是否落到底
+        if (item.y >= 50) {
+            //
+            return;
+        }
+        item.y += 1;
+        setTimeout(function(){
+            drawItem(item);
+        }, 100);
+    }
+
+
+</script>
+</body>
+</html>

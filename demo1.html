@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>demo1</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <style>
+        .box { background: #FF0000; margin:10px; float:left;}
+        #box1 { height:400px; width:300px;}
+        #box2 { height:400px; width:400px;}
+        #box3 { height:300px; width:400px;}
+        #box .box{ position: relative;}
+        .box img{ position: absolute; }
+        .img{ z-index: 1;}
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box1" class="box">
+        <img id="img1" class="img" src="skin/images/2.png" />
+        <img id="pic1" src="skin/images/bg.jpg">
+    </div>
+    <div id="box2" class="box">
+        <img id="img2" class="img" src="skin/images/2.png" />
+        <img id="pic2" src="skin/images/bg.jpg">
+    </div>
+    <div id="box3" class="box">
+        <img id="img3" class="img" src="skin/images/2.png" />
+        <img id="pic3" src="skin/images/bg.jpg">
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //    var img1 = document.getElementById("img1");
+    //    var img2 = document.getElementById("img2");
+    //    var img3 = document.getElementById("img3");
+    //    var pic1 = document.getElementById("pic1");
+    //    var pic2 = document.getElementById("pic2");
+    //    var pic3 = document.getElementById("pic3");
+
+    var maxWidth = [300, 400, 400];
+    var maxHeight = [400, 400, 300];
+
+    for ( var i = 1 ; i <= 3; i++ ){
+        var img = document.getElementById("img"+i);
+        var pic = document.getElementById("pic"+i);
+        drawImage(img, pic, maxWidth[i - 1], maxHeight[i - 1]);
+    }
+
+    function drawImage(img, pic, maxWidth, maxHeight){
+        if(img.height / img.width >= maxHeight / maxWidth){
+            img.width = img.width * maxHeight / img.height;
+            img.height = maxHeight;
+        } else {
+            img.height = img.height * maxWidth / img.width;
+            img.width = maxWidth;
+        }
+        img.style.marginTop = (maxHeight - img.height) / 2 + "px";
+        img.style.marginLeft = (maxWidth - img.width) / 2 + "px";
+
+        pic.width = img.width;
+        pic.height = img.height;
+
+        pic.style.marginTop = img.style.marginTop;
+        pic.style.marginLeft = img.style.marginLeft;
+
+
+    }
+
+
+//    drawImage(img[1], pic[1], 300, 400);
+//    drawImage(img[2], pic[2], 400, 400);
+//    drawImage(img[3], pic[3], 400, 300);
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>index</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+</head>
+<body>
+<div id="show">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;***<br />
+    &nbsp;&nbsp;&nbsp;*****<br />
+    &nbsp;&nbsp;*******<br />
+    &nbsp;*********<br />
+    ***********<br />
+    &nbsp;*********<br />
+    &nbsp;&nbsp;*******<br />
+    &nbsp;&nbsp;&nbsp;*****<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;***<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+</div>
+
+<script type="text/javascript">
+    var show = document.getElementById("show");
+    var a = '&nbsp;';
+    var b = '*';
+
+    var line = '';
+
+    var i = 5, k = 0;
+    while (i >= 0) {
+
+
+        var j = i;
+        while (j > 0) {
+            line += a;
+            j--;
+        }
+        var j = 2*k + 1;
+        while (j >= 1) {
+            line += b;
+            j--;
+        }
+        line += '<br />';
+
+
+        i--;
+        k++;
+    }
+
+    var i = 1,  k = 4;
+    while (i <= 5) {
+
+
+        var j = i;
+        while (j >= 1) {
+            line += a;
+            j--;
+        }
+        var j = 2*k + 1;
+        while (j > 0) {
+            line += b;
+            j--;
+        }
+
+        line += '<br />';
+
+
+        i++;
+        k--;
+    }
+
+
+    show.innerHTML = line;
+</script>
+</body>
+</html>
